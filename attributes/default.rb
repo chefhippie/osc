@@ -18,6 +18,7 @@
 #
 
 default["osc"]["packages"] = %w(
+  quilt
   osc
   obs-service-tar_scm 
   obs-service-source_validator 
