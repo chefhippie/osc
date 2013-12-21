@@ -17,14 +17,17 @@
 # limitations under the License.
 #
 
-include_recipe "zypper"
+case node["platform_family"]
+when "suse"
+  include_recipe "zypper"
 
-zypper_repository "devel-tools-scm" do
-  uri "http://download.opensuse.org/repositories/devel:/tools:/scm/openSUSE_12.3/"
-  key "http://download.opensuse.org/repositories/devel:/tools:/scm/openSUSE_12.3/repodata/repomd.xml.key"
-  title "Software configuration management"
+  zypper_repository "devel-tools-scm" do
+    uri "http://download.opensuse.org/repositories/devel:/tools:/scm/openSUSE_12.3/"
+    key "http://download.opensuse.org/repositories/devel:/tools:/scm/openSUSE_12.3/repodata/repomd.xml.key"
+    title "Software configuration management"
 
-  action :add
+    action :add
+  end
 end
 
 node["osc"]["packages"].each do |name|

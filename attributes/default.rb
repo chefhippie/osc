@@ -17,13 +17,26 @@
 # limitations under the License.
 #
 
-default["osc"]["packages"] = %w(
-  quilt
-  osc
-  obs-service-tar_scm 
-  obs-service-source_validator 
-  obs-service-set_version 
-  obs-service-recompress 
-  obs-service-verify_file 
-  obs-service-format_spec_file
-)
+case node["platform_family"]
+when "debian"
+  default["osc"]["packages"] = %w(
+    quilt
+    osc
+  )
+when "ubuntu"
+  default["osc"]["packages"] = %w(
+    quilt
+    osc
+  )
+when "suse"
+  default["osc"]["packages"] = %w(
+    quilt
+    osc
+    obs-service-tar_scm 
+    obs-service-source_validator 
+    obs-service-set_version 
+    obs-service-recompress 
+    obs-service-verify_file 
+    obs-service-format_spec_file
+  )
+end
