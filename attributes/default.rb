@@ -17,19 +17,16 @@
 # limitations under the License.
 #
 
-case node["platform_family"]
-when "debian"
-  default["osc"]["packages"] = %w(
+default["osc"]["packages"] = value_for_platform_family(
+  "debian" => %w(
     quilt
     osc
-  )
-when "ubuntu"
-  default["osc"]["packages"] = %w(
+  ),
+  "ubuntu" => %w(
     quilt
     osc
-  )
-when "suse"
-  default["osc"]["packages"] = %w(
+  ),
+  "suse" => %w(
     quilt
     osc
     obs-service-tar_scm 
@@ -39,4 +36,9 @@ when "suse"
     obs-service-verify_file 
     obs-service-format_spec_file
   )
-end
+)
+
+default["osc"]["zypper"]["alias"] = "devel-tools-scm"
+default["osc"]["zypper"]["title"] = "Software configuration management"
+default["osc"]["zypper"]["repo"] = "http://download.opensuse.org/repositories/devel:/tools:/scm/openSUSE_#{node["platform_version"] == "12.1" ? "12.3" : node["platform_version"]}/"
+default["osc"]["zypper"]["key"] = "#{node["osc"]["zypper"]["repo"]}repodata/repomd.xml.key"

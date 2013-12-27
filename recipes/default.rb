@@ -21,10 +21,10 @@ case node["platform_family"]
 when "suse"
   include_recipe "zypper"
 
-  zypper_repository "devel-tools-scm" do
-    uri "http://download.opensuse.org/repositories/devel:/tools:/scm/openSUSE_12.3/"
-    key "http://download.opensuse.org/repositories/devel:/tools:/scm/openSUSE_12.3/repodata/repomd.xml.key"
-    title "Software configuration management"
+  zypper_repository node["osc"]["zypper"]["alias"] do
+    uri node["osc"]["zypper"]["repo"]
+    key node["osc"]["zypper"]["key"]
+    title node["osc"]["zypper"]["title"]
 
     action :add
   end
