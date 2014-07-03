@@ -35,10 +35,11 @@ default["osc"]["packages"] = value_for_platform_family(
     obs-service-recompress 
     obs-service-verify_file 
     obs-service-format_spec_file
+    obs-service-refresh_patches
   )
 )
 
-default["osc"]["zypper"]["alias"] = "devel-tools-scm"
-default["osc"]["zypper"]["title"] = "Software configuration management"
-default["osc"]["zypper"]["repo"] = "http://download.opensuse.org/repositories/devel:/tools:/scm/openSUSE_#{node["platform_version"] == "12.1" ? "12.3" : node["platform_version"]}/"
+default["osc"]["zypper"]["alias"] = "opensuse-tools"
+default["osc"]["zypper"]["title"] = "openSUSE Tools"
+default["osc"]["zypper"]["repo"] = "http://download.opensuse.org/repositories/openSUSE:/Tools/openSUSE_#{node["platform_version"]}/"
 default["osc"]["zypper"]["key"] = "#{node["osc"]["zypper"]["repo"]}repodata/repomd.xml.key"
