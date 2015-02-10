@@ -22,23 +22,20 @@ default["osc"]["packages"] = value_for_platform_family(
     quilt
     osc
   ),
-  "ubuntu" => %w(
-    quilt
-    osc
-  ),
   "suse" => %w(
     quilt
     osc
-    obs-service-tar_scm 
-    obs-service-source_validator 
-    obs-service-set_version 
-    obs-service-recompress 
-    obs-service-verify_file 
+    obs-service-tar_scm
+    obs-service-source_validator
+    obs-service-set_version
+    obs-service-recompress
+    obs-service-verify_file
     obs-service-format_spec_file
     obs-service-refresh_patches
   )
 )
 
+default["osc"]["zypper"]["enabled"] = true
 default["osc"]["zypper"]["alias"] = "opensuse-tools"
 default["osc"]["zypper"]["title"] = "openSUSE Tools"
 default["osc"]["zypper"]["repo"] = "http://download.opensuse.org/repositories/openSUSE:/Tools/openSUSE_#{node["platform_version"]}/"

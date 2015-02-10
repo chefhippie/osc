@@ -27,6 +27,10 @@ when "suse"
     title node["osc"]["zypper"]["title"]
 
     action :add
+
+    only_if do
+      node["osc"]["zypper"]["enabled"]
+    end
   end
 end
 
