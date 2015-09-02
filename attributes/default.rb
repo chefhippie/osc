@@ -38,5 +38,5 @@ default["osc"]["packages"] = value_for_platform_family(
 default["osc"]["zypper"]["enabled"] = true
 default["osc"]["zypper"]["alias"] = "opensuse-tools"
 default["osc"]["zypper"]["title"] = "openSUSE Tools"
-default["osc"]["zypper"]["repo"] = "http://download.opensuse.org/repositories/openSUSE:/Tools/openSUSE_#{node["platform_version"]}/"
+default["osc"]["zypper"]["repo"] = "http://download.opensuse.org/repositories/openSUSE:/Tools/openSUSE_#{node["platform_version"].to_i.to_s == node["platform_version"] ? "Tumbleweed" : node["platform_version"]}/"
 default["osc"]["zypper"]["key"] = "#{node["osc"]["zypper"]["repo"]}repodata/repomd.xml.key"
