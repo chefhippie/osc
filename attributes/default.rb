@@ -35,8 +35,22 @@ default["osc"]["packages"] = value_for_platform_family(
   )
 )
 
-default["osc"]["zypper"]["enabled"] = true
-default["osc"]["zypper"]["alias"] = "opensuse-tools"
-default["osc"]["zypper"]["title"] = "openSUSE Tools"
-default["osc"]["zypper"]["repo"] = "http://download.opensuse.org/repositories/openSUSE:/Tools/openSUSE_#{node["platform_version"].to_i.to_s == node["platform_version"] ? "Tumbleweed" : node["platform_version"]}/"
-default["osc"]["zypper"]["key"] = "#{node["osc"]["zypper"]["repo"]}repodata/repomd.xml.key"
+case node["platform_family"]
+when "suse"
+  repo = case node["platform_version"]
+  when /\A13\.\d+\z/
+    "openSUSE_#{node["platform_version"]}"
+  when /\A42\.\d+\z/
+    "openSUSE_#{node["platform_version"]}"
+  when /\A\d{8}\z/
+    "openSUSE_Tumbleweed"
+  else
+    raise "Unsupported SUSE version"
+  end
+
+  default["osc"]["zypper"]["enabled"] = true
+  default["osc"]["zypper"]["alias"] = "opensuse-tools"
+  default["osc"]["zypper"]["title"] = "openSUSE Tools"
+  default["osc"]["zypper"]["repo"] = "http://download.opensuse.org/repositories/openSUSE:/Tools/#{repo}/"
+  default["osc"]["zypper"]["key"] = "#{node["osc"]["zypper"]["repo"]}repodata/repomd.xml.key"
+end
